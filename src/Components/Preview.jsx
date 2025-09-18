@@ -2,8 +2,8 @@ const PreviewWidget = ({ widget }) => {
   return (
     <div
       className={`
-          ${widget.width || "w-full"} 
-          ${widget.height || "h-64"}
+          w-full max-w-6xl
+          ${widget.height || "min-h-[500px]"}
           ${widget.gradient || "bg-white"}
           flex flex-col justify-between p-8
           transition-all duration-300 overflow-hidden
@@ -30,7 +30,7 @@ const PreviewWidget = ({ widget }) => {
       {widget.image && (
         <div
           className="flex-shrink-0 mr-16 my-4 ml-auto"
-          style={{ width: "200px", height: "150px" }}
+          style={{ width: "400px", height: "300px" }}
         >
           <img
             src={widget.image}
@@ -62,9 +62,9 @@ const Preview = () => {
   useEffect(() => {
     const savedWidgets = JSON.parse(localStorage.getItem("widgets"));
     if (savedWidgets) {
-      setWidgets(savedWidgets); 
+      setWidgets(savedWidgets);
     }
-  }, []); 
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-tr from-white to-gray-200 pt-20">
@@ -74,7 +74,7 @@ const Preview = () => {
             Preview Mode
           </h1>
           <p className="text-gray-600">
-            This is how your landing page will look 
+            This is how your landing page will look
           </p>
         </div>
       </div>

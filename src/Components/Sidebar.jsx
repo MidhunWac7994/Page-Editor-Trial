@@ -1,6 +1,6 @@
 import React from "react";
 import { X } from "lucide-react";
-import DummyWidgets from "./DummyWidgets";
+import DummyWidgets from "../Components/DummyWidgets";
 import { useSidebar } from "../CustomHooks/useSidebar";
 
 const QUICK_COLORS = [

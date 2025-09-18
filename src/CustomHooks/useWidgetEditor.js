@@ -8,6 +8,7 @@ export const useWidgetEditor = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [showTemplateSelector, setShowTemplateSelector] = useState(false);
   const [pendingAddPosition, setPendingAddPosition] = useState(null);
+  console.log(DummyWidgets, "DummyWidgets");
 
 
   useEffect(() => {

@@ -1,4 +1,3 @@
-
 import Sidebar from "../Components/Sidebar";
 import { useWidgetEditor } from "../CustomHooks/useWidgetEditor";
 import EmptyState from "../Components/EmptyState";

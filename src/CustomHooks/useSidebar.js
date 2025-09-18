@@ -13,7 +13,7 @@ export const useSidebar = (selectedWidget, onWidgetUpdate) => {
     },
     [selectedWidget, onWidgetUpdate]
   );
-
+  
   const handleColorChange = useCallback(
     (colorType, color) => {
       if (!selectedWidget) return;
@@ -25,7 +25,7 @@ export const useSidebar = (selectedWidget, onWidgetUpdate) => {
       onWidgetUpdate(updatedWidget);
     },
     [selectedWidget, onWidgetUpdate]
-  );
+  );     
 
   const handleQuickColorApply = useCallback(
     (color, targetField = "titleColor") => {
