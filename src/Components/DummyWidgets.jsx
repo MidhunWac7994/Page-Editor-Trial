@@ -1,7 +1,7 @@
 const DummyWidgets = [
   {
     id: 1,
-    name: "Hero",
+    name: "Hero Section",
     title: "Transform Your Digital Experience",
     subtitle:
       "Unleash the power of cutting-edge technology to revolutionize your business.",
@@ -17,7 +17,7 @@ const DummyWidgets = [
   },
   {
     id: 2,
-    name: "Features",
+    name: "Features Section",
     title: "Features Overview",
     subtitle: "Highlight the key features of your product or service.",
     content: "• Fast performance\n• Easy integration\n• Customizable options",
@@ -28,7 +28,7 @@ const DummyWidgets = [
   },
   {
     id: 5,
-    name: "Testimonials",
+    name: "Testimonials Section",
     title: "Testimonials",
     subtitle: "Share what your customers are saying.",
     content:
@@ -40,7 +40,7 @@ const DummyWidgets = [
   },
   {
     id: 7,
-    name: "Pricing",
+    name: "Pricing Section",
     title: "Pricing Plans",
     subtitle: "Display your pricing tiers with clarity.",
     content: "Basic - $10/mo\nPro - $25/mo\nEnterprise - $50/mo",
@@ -52,7 +52,7 @@ const DummyWidgets = [
   },
   {
     id: 9,
-    name: "Contact",
+    name: "Contact Section",
     title: "Contact Form",
     subtitle: "Let users get in touch with you easily.",
     content: "Name: \nEmail: \nMessage:",
@@ -65,7 +65,7 @@ const DummyWidgets = [
   },
   {
     id: 10,
-    name: "About Us",
+    name: "About Us Section",
     title: "Our Story",
     subtitle: "Discover the journey behind our creation.",
     content: `In the beginning, there was an idea. An idea born from passion...`,
@@ -77,7 +77,7 @@ const DummyWidgets = [
   },
   {
     id: 11,
-    name: "Services",
+    name: "Services Section",
     title: "Our Premium Services",
     subtitle: "Comprehensive solutions tailored to your business needs.",
     content:
@@ -90,7 +90,7 @@ const DummyWidgets = [
   },
   {
     id: 12,
-    name: "Team",
+    name: "Team Section",
     title: "Meet Our Expert Team",
     subtitle: "Passionate professionals dedicated to your success.",
     content:
@@ -104,7 +104,7 @@ const DummyWidgets = [
   },
   {
     id: 13,
-    name: "Statistics",
+    name: "Statistics Section",
     title: "Success by the Numbers",
     subtitle: "Real results that speak for themselves.",
     content:
@@ -116,7 +116,7 @@ const DummyWidgets = [
   },
   {
     id: 14,
-    name: "Integration",
+    name: "Integration Section",
     title: "Seamless Integrations",
     subtitle: "Connect with your favorite tools and platforms effortlessly.",
     content:
@@ -131,7 +131,7 @@ const DummyWidgets = [
   },
   {
     id: 15,
-    name: "Resources",
+    name: "Resources Section",
     title: "Knowledge Hub",
     subtitle: "Everything you need to succeed with our platform.",
     content:
@@ -144,7 +144,7 @@ const DummyWidgets = [
   },
   {
     id: 16,
-    name: "CTA",
+    name: "CTA Section",
     title: "Ready to Get Started?",
     subtitle: "Join thousands of satisfied customers today.",
     content:

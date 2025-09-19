@@ -1,4 +1,3 @@
-import React from "react";
 import { Eye, Edit3, Sparkles } from "lucide-react";
 
 export default function Header({ isPreviewMode = false, onToggleMode }) {

@@ -1,18 +1,26 @@
 const PreviewWidget = ({ widget }) => {
+  const backgroundType = widget.backgroundType || "gradient"; // fallback to gradient if not set
+  const isSolid = backgroundType === "solid";
+
   return (
     <div
       className={`
-          w-full max-w-6xl
-          ${widget.height || "min-h-[500px]"}
-          ${widget.gradient || "bg-white"}
-          flex flex-col justify-between p-8
-          transition-all duration-300 overflow-hidden
-        `}
+        w-full max-w-6xl ml-80
+        ${widget.height || "min-h-[500px]"}
+        flex flex-col justify-between p-8
+        transition-all duration-300 overflow-hidden
+        ${!isSolid ? widget.gradient || "bg-white" : ""}
+      `}
+      style={{
+        backgroundColor: isSolid
+          ? widget.backgroundColor || "#ffffff"
+          : undefined,
+      }}
     >
       <div className="flex-shrink-0 mb-4">
         <h2
           className={`mb-3 ${widget.titleStyle || "text-2xl"}`}
-          style={{ color: widget.titleColor || "#000000" }}
+          style={{ color: widget.titleColor || "#FFFFFF" }}
         >
           {widget.title}
         </h2>
@@ -34,7 +42,7 @@ const PreviewWidget = ({ widget }) => {
         >
           <img
             src={widget.image}
-            alt="Widget Image"
+            alt="Widget"
             className="w-full h-full object-cover rounded-lg shadow-lg"
           />
         </div>

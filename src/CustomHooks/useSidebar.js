@@ -41,7 +41,7 @@ export const useSidebar = (selectedWidget, onWidgetUpdate) => {
       const updatedWidget = {
         ...selectedWidget,
         backgroundType,
-        // If switching to solid, provide a default background color
+        
         ...(backgroundType === "solid" &&
           !selectedWidget.backgroundColor && {
             backgroundColor: "#ffffff",
@@ -59,7 +59,7 @@ export const useSidebar = (selectedWidget, onWidgetUpdate) => {
       const updatedWidget = {
         ...selectedWidget,
         backgroundColor: color,
-        backgroundType: "solid", // Ensure we're in solid mode when changing background color
+        backgroundType: "solid", 
       };
       onWidgetUpdate(updatedWidget);
     },

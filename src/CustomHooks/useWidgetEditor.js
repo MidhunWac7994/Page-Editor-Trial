@@ -10,15 +10,20 @@ export const useWidgetEditor = () => {
   const [pendingAddPosition, setPendingAddPosition] = useState(null);
   console.log(DummyWidgets, "DummyWidgets");
 
-
   useEffect(() => {
     const savedWidgets = JSON.parse(localStorage.getItem("widgets"));
     if (savedWidgets) {
-      setWidgets(savedWidgets);
+
+      const normalizedWidgets = savedWidgets.map((widget) => ({
+        backgroundType: widget.backgroundType || "gradient",
+        ...widget,
+      }));
+      setWidgets(normalizedWidgets);
     } else {
       setWidgets(DummyWidgets);
     }
   }, []);
+  
 
   const selectedWidget = widgets.find((w) => w.id === selectedId);
 

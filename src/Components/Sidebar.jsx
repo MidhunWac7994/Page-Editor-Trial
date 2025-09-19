@@ -1,7 +1,7 @@
-import React from "react";
 import { X } from "lucide-react";
-import DummyWidgets from "../Components/DummyWidgets";
+import DummyWidgets from "./DummyWidgets";
 import { useSidebar } from "../CustomHooks/useSidebar";
+
 
 const QUICK_COLORS = [
   "#000000",
@@ -58,6 +58,7 @@ const BACKGROUND_COLORS = [
   "#8b5cf6",
   "#7c3aed",
 ];
+
 
 const ColorPicker = ({ label, value, onChange, placeholder }) => (
   <div>
@@ -140,7 +141,7 @@ const TemplateSelector = ({ onSelectTemplate, onCancelTemplateSelection }) => (
             </p>
           </div>
           <p className="text-xs text-gray-500 mt-1 px-1">
-            {template.content.substring(0, 50)}...
+            {template.name.substring(0, 50)}
           </p>
         </div>
       ))}
@@ -353,6 +354,7 @@ export default function Sidebar({
         >
           Save Changes
         </button>
+        
       </div>
     </aside>
   );

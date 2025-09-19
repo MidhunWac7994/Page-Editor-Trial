@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
 import { X, Upload, Trash2 } from "lucide-react";
+import useImageUpload from "../CustomHooks/useImageUpload";
 
 const ImageModal = ({
   isOpen,
@@ -8,44 +8,16 @@ const ImageModal = ({
   onImageUpload,
   onImageRemove,
 }) => {
-  const [dragActive, setDragActive] = useState(false);
-  const fileInputRef = useRef(null);
+  const {
+    dragActive,
+    fileInputRef,
+    handleDrop,
+    handleDragOver,
+    handleDragLeave,
+    handleFileInputChange,
+  } = useImageUpload(onImageUpload);
 
   if (!isOpen) return null;
-
-  const handleFileUpload = (file) => {
-    if (file && file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        onImageUpload(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      alert("Please upload a valid image file.");
-    }
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setDragActive(false);
-    const file = e.dataTransfer.files[0];
-    handleFileUpload(file);
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    setDragActive(true);
-  };
-
-  const handleDragLeave = (e) => {
-    e.preventDefault();
-    setDragActive(false);
-  };
-
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    handleFileUpload(file);
-  };
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
