@@ -1,225 +1,11 @@
-import { X } from "lucide-react";
-import DummyWidgets from "./DummyWidgets";
-import { useSidebar } from "../CustomHooks/useSidebar";
-
-
-const QUICK_COLORS = [
-  "#000000",
-  "#ffffff",
-  "#ef4444",
-  "#f97316",
-  "#eab308",
-  "#22c55e",
-  "#06b6d4",
-  "#3b82f6",
-  "#8b5cf6",
-  "#ec4899",
-];
-
-const BACKGROUND_COLORS = [
-  "#ffffff",
-  "#f8fafc",
-  "#f1f5f9",
-  "#e2e8f0",
-  "#cbd5e1",
-  "#94a3b8",
-  "#64748b",
-  "#475569",
-  "#334155",
-  "#1e293b",
-  "#fef2f2",
-  "#fee2e2",
-  "#fecaca",
-  "#f87171",
-  "#ef4444",
-  "#fefce8",
-  "#fef3c7",
-  "#fde68a",
-  "#facc15",
-  "#eab308",
-  "#f0fdf4",
-  "#dcfce7",
-  "#bbf7d0",
-  "#4ade80",
-  "#22c55e",
-  "#ecfeff",
-  "#cffafe",
-  "#a5f3fc",
-  "#22d3ee",
-  "#06b6d4",
-  "#eff6ff",
-  "#dbeafe",
-  "#93c5fd",
-  "#3b82f6",
-  "#1d4ed8",
-  "#f3e8ff",
-  "#e9d5ff",
-  "#c084fc",
-  "#8b5cf6",
-  "#7c3aed",
-];
-
-
-const ColorPicker = ({ label, value, onChange, placeholder }) => (
-  <div>
-    <label className="block text-sm font-medium text-gray-700 mb-2">
-      {label}
-    </label>
-    <div className="flex items-center space-x-3">
-      <input
-        type="color"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-10 h-10 border border-gray-300 rounded cursor-pointer"
-      />
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="flex-1 px-3 py-2 border border-gray-200 rounded-none focus:border-[#F65A8E] transition-colors text-sm"
-        placeholder={placeholder}
-      />
-    </div>
-  </div>
-);
-
-const EditableField = ({
-  label,
-  value,
-  onUpdate,
-  className = "",
-  multiline = false,
-}) => (
-  <div>
-    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
-      {label}
-    </h3>
-    <div
-      className={`text-lg font-medium text-gray-800 outline-none p-2 border border-gray-200 rounded-none focus:border-[#F65A8E] transition-colors ${className}`}
-      contentEditable
-      suppressContentEditableWarning={true}
-      onBlur={(e) => onUpdate(e.currentTarget.textContent)}
-      spellCheck={false}
-    >
-      {value}
-    </div>
-  </div>
-);
-
-const TemplateSelector = ({ onSelectTemplate, onCancelTemplateSelection }) => (
-  <aside className="fixed top-[80px] right-0 h-[calc(100vh-80px)] w-80 bg-white shadow-xl p-6 border-l border-gray-200 overflow-y-auto">
-    <div className="flex items-center justify-between mb-6">
-      <h2 className="text-2xl font-extrabold text-gray-900">Choose Template</h2>
-      <button
-        onClick={onCancelTemplateSelection}
-        className="p-1 hover:bg-gray-100 rounded"
-      >
-        <X className="h-5 w-5 text-gray-500" />
-      </button>
-    </div>
-
-    <div className="space-y-3">
-      {DummyWidgets.map((template, index) => (
-        <div
-          key={index}
-          onClick={() => onSelectTemplate(template)}
-          className="cursor-pointer group"
-        >
-          <div
-            className={`
-              ${template.gradient}
-              h-24 rounded-lg p-3 flex flex-col justify-between
-              transition-all duration-200 hover:scale-105 hover:shadow-lg
-              border-2 border-transparent group-hover:border-white
-            `}
-          >
-            <h3 className="text-sm font-bold text-white truncate">
-              {template.title}
-            </h3>
-            <p className="text-xs text-white/80 truncate">
-              {template.subtitle}
-            </p>
-          </div>
-          <p className="text-xs text-gray-500 mt-1 px-1">
-            {template.name.substring(0, 50)}
-          </p>
-        </div>
-      ))}
-    </div>
-  </aside>
-);
-
-const EmptyState = () => (
-  <aside className="fixed top-[80px] right-0 h-[calc(100vh-80px)] w-80 bg-white shadow-xl p-6 border-l border-gray-200 overflow-y-auto">
-    <p className="text-center text-gray-400">
-      Select a widget to edit or click + to add new.
-    </p>
-  </aside>
-);
-
-const QuickColorPalette = ({ onColorSelect, title = "Quick Colors" }) => (
-  <div className="mt-4">
-    <h4 className="text-xs font-medium text-gray-600 mb-2">{title}</h4>
-    <div className="flex flex-wrap gap-2">
-      {QUICK_COLORS.map((color) => (
-        <button
-          key={color}
-          onClick={() => onColorSelect(color)}
-          className="w-8 h-8 rounded border-2 border-gray-300 hover:border-gray-400 transition-colors"
-          style={{ backgroundColor: color }}
-          title={color}
-        />
-      ))}
-    </div>
-  </div>
-);
-
-const BackgroundColorPalette = ({ onColorSelect }) => (
-  <div className="mt-4">
-    <h4 className="text-xs font-medium text-gray-600 mb-2">
-      Background Colors
-    </h4>
-    <div className="grid grid-cols-8 gap-2">
-      {BACKGROUND_COLORS.map((color) => (
-        <button
-          key={color}
-          onClick={() => onColorSelect(color)}
-          className="w-8 h-8 rounded border-2 border-gray-300 hover:border-gray-400 transition-colors"
-          style={{ backgroundColor: color }}
-          title={color}
-        />
-      ))}
-    </div>
-  </div>
-);
-
-const BackgroundTypeToggle = ({ backgroundType, onToggle }) => (
-  <div className="mb-4">
-    <h4 className="text-xs font-medium text-gray-600 mb-2">Background Type</h4>
-    <div className="flex rounded-lg border border-gray-300 overflow-hidden">
-      <button
-        onClick={() => onToggle("gradient")}
-        className={`px-4 py-2 text-sm font-medium transition-colors flex-1 ${
-          backgroundType === "gradient"
-            ? "bg-[#F65A8E] text-white"
-            : "bg-white text-gray-700 hover:bg-gray-50"
-        }`}
-      >
-        Gradient
-      </button>
-      <button
-        onClick={() => onToggle("solid")}
-        className={`px-4 py-2 text-sm font-medium transition-colors flex-1 border-l border-gray-300 ${
-          backgroundType === "solid"
-            ? "bg-[#F65A8E] text-white"
-            : "bg-white text-gray-700 hover:bg-gray-50"
-        }`}
-      >
-        Solid Color
-      </button>
-    </div>
-  </div>
-);
+import EmptyState from "./EmptyState";
+import BackgroundColorPalette from "./Sidebar/BackgroundColorPalette";
+import BackgroundTypeToggle from "./Sidebar/BackgroundTypeToggle";
+import ColorPicker from "./Sidebar/ColorPicker";
+import EditableField from "./Sidebar/EditableField";
+import QuickColorPalette from "./Sidebar/QuickColorPalette";
+import TemplateSelector from "./Sidebar/TemplateSelector";
+import useSidebar from "../CustomHooks/useSidebar";
 
 export default function Sidebar({
   selectedWidget,
@@ -289,7 +75,7 @@ export default function Sidebar({
             onToggle={handleBackgroundTypeChange}
           />
 
-          {backgroundType === "solid" && (
+          {backgroundType === "solid" ? (
             <>
               <ColorPicker
                 label="Background Color"
@@ -297,17 +83,14 @@ export default function Sidebar({
                 onChange={handleBackgroundColorChange}
                 placeholder="#ffffff"
               />
-
               <BackgroundColorPalette
                 onColorSelect={handleBackgroundColorChange}
               />
             </>
-          )}
-
-          {backgroundType === "gradient" && (
+          ) : (
             <div className="text-sm text-gray-600 p-3 bg-gray-50 rounded">
-              Using gradient background from template. Switch to Solid Color
-              to customize background color.
+              Using gradient background from template. Switch to Solid Color to
+              customize background color.
             </div>
           )}
         </div>
@@ -324,14 +107,12 @@ export default function Sidebar({
               onChange={(color) => handleColorChange("titleColor", color)}
               placeholder="#000000"
             />
-
             <ColorPicker
               label="Subtitle Color"
               value={selectedWidget.subtitleColor || "#4338ca"}
               onChange={(color) => handleColorChange("subtitleColor", color)}
               placeholder="#4338ca"
             />
-
             <ColorPicker
               label="Content Color"
               value={selectedWidget.contentColor || "#1f2937"}
@@ -354,7 +135,6 @@ export default function Sidebar({
         >
           Save Changes
         </button>
-        
       </div>
     </aside>
   );

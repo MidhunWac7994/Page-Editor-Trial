@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-export const useSidebar = (selectedWidget, onWidgetUpdate) => {
+const useSidebar = (selectedWidget, onWidgetUpdate) => {
   const handleFieldUpdate = useCallback(
     (field, value) => {
       if (!selectedWidget) return;
@@ -41,7 +41,7 @@ export const useSidebar = (selectedWidget, onWidgetUpdate) => {
       const updatedWidget = {
         ...selectedWidget,
         backgroundType,
-        
+
         ...(backgroundType === "solid" &&
           !selectedWidget.backgroundColor && {
             backgroundColor: "#ffffff",
@@ -59,7 +59,7 @@ export const useSidebar = (selectedWidget, onWidgetUpdate) => {
       const updatedWidget = {
         ...selectedWidget,
         backgroundColor: color,
-        backgroundType: "solid", 
+        backgroundType: "solid",
       };
       onWidgetUpdate(updatedWidget);
     },
@@ -74,3 +74,5 @@ export const useSidebar = (selectedWidget, onWidgetUpdate) => {
     handleBackgroundColorChange,
   };
 };
+
+export default useSidebar;

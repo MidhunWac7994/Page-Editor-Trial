@@ -38,7 +38,6 @@ const Widget = ({
     setShowImageModal(false);
   };
 
-  // Determine background styling based on background type
   const getBackgroundStyle = () => {
     const backgroundType = widget.backgroundType || "gradient";
 
@@ -48,7 +47,6 @@ const Widget = ({
         backgroundImage: "none",
       };
     } else {
-      // Use gradient class
       return {};
     }
   };
@@ -57,15 +55,14 @@ const Widget = ({
     const backgroundType = widget.backgroundType || "gradient";
 
     if (backgroundType === "solid") {
-      return ""; // No gradient class when using solid background
+      return ""; 
     } else {
-      return widget.gradient || ""; // Use gradient class
+      return widget.gradient || ""; 
     }
   };
 
   return (
     <>
-      {/* Wrapper div centers the widget and ensures uniform width */}
       <div className="flex justify-center w-full">
         <div
           onClick={() => onSelect(widget.id)}
@@ -91,9 +88,7 @@ const Widget = ({
             />
           )}
 
-          {/* Main flex container: text left, image right */}
           <div className="flex flex-col lg:flex-row justify-between items-start gap-8 h-full">
-            {/* Left side - Text content */}
             <div className="flex-1 min-w-0 flex flex-col justify-center">
               <EditableContent
                 as="h2"
@@ -140,7 +135,6 @@ const Widget = ({
               )}
             </div>
 
-            {/* Right side - Image or add image placeholder */}
             <div className="flex-shrink-0 w-full lg:w-[400px] h-[250px] lg:h-[300px]">
               {widget.image ? (
                 <img
