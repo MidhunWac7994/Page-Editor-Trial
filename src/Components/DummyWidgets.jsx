@@ -154,7 +154,7 @@ const DummyWidgets = [
     titleStyle: "text-5xl font-extrabold font-sans text-white text-center",
     subtitleStyle:
       "text-2xl font-light font-serif text-white/95 mt-4 text-center",
-    height: "min-h-[500px]",
+    height: "min-h-[100px]",
   },
 ];
 
