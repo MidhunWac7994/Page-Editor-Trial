@@ -58,8 +58,17 @@ const PreviewWidget = ({ widget }) => {
           </div>
         </div>
       )}
+
+      {widget.buttonText && (
+        <div className="mt-6">
+          <button className="bg-[#F65A8E] hover:bg-red-700 text-white px-6 py-3 rounded-md font-medium focus:outline-none transition-colors">
+            {widget.buttonText}
+          </button>
+        </div>
+      )}
     </div>
   );
+  
 };
 
 import { useEffect, useState } from "react";
@@ -104,6 +113,7 @@ const Preview = () => {
           ))
         )}
       </main>
+      
 
       <footer className="bg-gray-100 border-t border-gray-200 py-6 mt-12">
         <div className="max-w-4xl mx-auto px-6 text-center">
