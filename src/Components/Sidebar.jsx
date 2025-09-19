@@ -4,8 +4,59 @@ import DummyWidgets from "../Components/DummyWidgets";
 import { useSidebar } from "../CustomHooks/useSidebar";
 
 const QUICK_COLORS = [
-  "#000000", "#ffffff", "#ef4444", "#f97316", "#eab308",
-  "#22c55e", "#06b6d4", "#3b82f6", "#8b5cf6", "#ec4899"
+  "#000000",
+  "#ffffff",
+  "#ef4444",
+  "#f97316",
+  "#eab308",
+  "#22c55e",
+  "#06b6d4",
+  "#3b82f6",
+  "#8b5cf6",
+  "#ec4899",
+];
+
+const BACKGROUND_COLORS = [
+  "#ffffff",
+  "#f8fafc",
+  "#f1f5f9",
+  "#e2e8f0",
+  "#cbd5e1",
+  "#94a3b8",
+  "#64748b",
+  "#475569",
+  "#334155",
+  "#1e293b",
+  "#fef2f2",
+  "#fee2e2",
+  "#fecaca",
+  "#f87171",
+  "#ef4444",
+  "#fefce8",
+  "#fef3c7",
+  "#fde68a",
+  "#facc15",
+  "#eab308",
+  "#f0fdf4",
+  "#dcfce7",
+  "#bbf7d0",
+  "#4ade80",
+  "#22c55e",
+  "#ecfeff",
+  "#cffafe",
+  "#a5f3fc",
+  "#22d3ee",
+  "#06b6d4",
+  "#eff6ff",
+  "#dbeafe",
+  "#93c5fd",
+  "#3b82f6",
+  "#1d4ed8",
+  "#f3e8ff",
+  "#e9d5ff",
+  "#c084fc",
+  "#8b5cf6",
+  "#7c3aed",
 ];
 
 const ColorPicker = ({ label, value, onChange, placeholder }) => (
@@ -31,7 +82,13 @@ const ColorPicker = ({ label, value, onChange, placeholder }) => (
   </div>
 );
 
-const EditableField = ({ label, value, onUpdate, className = "", multiline = false }) => (
+const EditableField = ({
+  label,
+  value,
+  onUpdate,
+  className = "",
+  multiline = false,
+}) => (
   <div>
     <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
       {label}
@@ -51,9 +108,7 @@ const EditableField = ({ label, value, onUpdate, className = "", multiline = fal
 const TemplateSelector = ({ onSelectTemplate, onCancelTemplateSelection }) => (
   <aside className="fixed top-[80px] right-0 h-[calc(100vh-80px)] w-80 bg-white shadow-xl p-6 border-l border-gray-200 overflow-y-auto">
     <div className="flex items-center justify-between mb-6">
-      <h2 className="text-2xl font-extrabold text-gray-900">
-        Choose Template
-      </h2>
+      <h2 className="text-2xl font-extrabold text-gray-900">Choose Template</h2>
       <button
         onClick={onCancelTemplateSelection}
         className="p-1 hover:bg-gray-100 rounded"
@@ -101,11 +156,9 @@ const EmptyState = () => (
   </aside>
 );
 
-const QuickColorPalette = ({ onColorSelect }) => (
+const QuickColorPalette = ({ onColorSelect, title = "Quick Colors" }) => (
   <div className="mt-4">
-    <h4 className="text-xs font-medium text-gray-600 mb-2">
-      Quick Colors
-    </h4>
+    <h4 className="text-xs font-medium text-gray-600 mb-2">{title}</h4>
     <div className="flex flex-wrap gap-2">
       {QUICK_COLORS.map((color) => (
         <button
@@ -120,6 +173,53 @@ const QuickColorPalette = ({ onColorSelect }) => (
   </div>
 );
 
+const BackgroundColorPalette = ({ onColorSelect }) => (
+  <div className="mt-4">
+    <h4 className="text-xs font-medium text-gray-600 mb-2">
+      Background Colors
+    </h4>
+    <div className="grid grid-cols-8 gap-2">
+      {BACKGROUND_COLORS.map((color) => (
+        <button
+          key={color}
+          onClick={() => onColorSelect(color)}
+          className="w-8 h-8 rounded border-2 border-gray-300 hover:border-gray-400 transition-colors"
+          style={{ backgroundColor: color }}
+          title={color}
+        />
+      ))}
+    </div>
+  </div>
+);
+
+const BackgroundTypeToggle = ({ backgroundType, onToggle }) => (
+  <div className="mb-4">
+    <h4 className="text-xs font-medium text-gray-600 mb-2">Background Type</h4>
+    <div className="flex rounded-lg border border-gray-300 overflow-hidden">
+      <button
+        onClick={() => onToggle("gradient")}
+        className={`px-4 py-2 text-sm font-medium transition-colors flex-1 ${
+          backgroundType === "gradient"
+            ? "bg-[#F65A8E] text-white"
+            : "bg-white text-gray-700 hover:bg-gray-50"
+        }`}
+      >
+        Gradient
+      </button>
+      <button
+        onClick={() => onToggle("solid")}
+        className={`px-4 py-2 text-sm font-medium transition-colors flex-1 border-l border-gray-300 ${
+          backgroundType === "solid"
+            ? "bg-[#F65A8E] text-white"
+            : "bg-white text-gray-700 hover:bg-gray-50"
+        }`}
+      >
+        Solid Color
+      </button>
+    </div>
+  </div>
+);
+
 export default function Sidebar({
   selectedWidget,
   onSave,
@@ -128,10 +228,13 @@ export default function Sidebar({
   onSelectTemplate,
   onCancelTemplateSelection,
 }) {
-  const { handleFieldUpdate, handleColorChange, handleQuickColorApply } = useSidebar(
-    selectedWidget,
-    onWidgetUpdate
-  );
+  const {
+    handleFieldUpdate,
+    handleColorChange,
+    handleQuickColorApply,
+    handleBackgroundTypeChange,
+    handleBackgroundColorChange,
+  } = useSidebar(selectedWidget, onWidgetUpdate);
 
   if (showTemplateSelector) {
     return (
@@ -145,6 +248,8 @@ export default function Sidebar({
   if (!selectedWidget) {
     return <EmptyState />;
   }
+
+  const backgroundType = selectedWidget.backgroundType || "gradient";
 
   return (
     <aside className="fixed top-[80px] right-0 h-[calc(100vh-80px)] w-80 bg-white shadow-xl p-6 border-l border-gray-200 overflow-y-auto">
@@ -175,6 +280,39 @@ export default function Sidebar({
 
         <div className="border-t border-gray-200 pt-6">
           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">
+            Background Settings
+          </h3>
+
+          <BackgroundTypeToggle
+            backgroundType={backgroundType}
+            onToggle={handleBackgroundTypeChange}
+          />
+
+          {backgroundType === "solid" && (
+            <>
+              <ColorPicker
+                label="Background Color"
+                value={selectedWidget.backgroundColor || "#ffffff"}
+                onChange={handleBackgroundColorChange}
+                placeholder="#ffffff"
+              />
+
+              <BackgroundColorPalette
+                onColorSelect={handleBackgroundColorChange}
+              />
+            </>
+          )}
+
+          {backgroundType === "gradient" && (
+            <div className="text-sm text-gray-600 p-3 bg-gray-50 rounded">
+              Using gradient background from template. Switch to Solid Color
+              to customize background color.
+            </div>
+          )}
+        </div>
+
+        <div className="border-t border-gray-200 pt-6">
+          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">
             Text Colors
           </h3>
 
@@ -202,7 +340,10 @@ export default function Sidebar({
           </div>
 
           <QuickColorPalette
-            onColorSelect={(color) => handleQuickColorApply(color, "titleColor")}
+            onColorSelect={(color) =>
+              handleQuickColorApply(color, "titleColor")
+            }
+            title="Quick Text Colors"
           />
         </div>
 

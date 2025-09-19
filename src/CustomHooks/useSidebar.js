@@ -13,7 +13,7 @@ export const useSidebar = (selectedWidget, onWidgetUpdate) => {
     },
     [selectedWidget, onWidgetUpdate]
   );
-  
+
   const handleColorChange = useCallback(
     (colorType, color) => {
       if (!selectedWidget) return;
@@ -25,7 +25,7 @@ export const useSidebar = (selectedWidget, onWidgetUpdate) => {
       onWidgetUpdate(updatedWidget);
     },
     [selectedWidget, onWidgetUpdate]
-  );     
+  );
 
   const handleQuickColorApply = useCallback(
     (color, targetField = "titleColor") => {
@@ -34,9 +34,43 @@ export const useSidebar = (selectedWidget, onWidgetUpdate) => {
     [handleColorChange]
   );
 
+  const handleBackgroundTypeChange = useCallback(
+    (backgroundType) => {
+      if (!selectedWidget) return;
+
+      const updatedWidget = {
+        ...selectedWidget,
+        backgroundType,
+        // If switching to solid, provide a default background color
+        ...(backgroundType === "solid" &&
+          !selectedWidget.backgroundColor && {
+            backgroundColor: "#ffffff",
+          }),
+      };
+      onWidgetUpdate(updatedWidget);
+    },
+    [selectedWidget, onWidgetUpdate]
+  );
+
+  const handleBackgroundColorChange = useCallback(
+    (color) => {
+      if (!selectedWidget) return;
+
+      const updatedWidget = {
+        ...selectedWidget,
+        backgroundColor: color,
+        backgroundType: "solid", // Ensure we're in solid mode when changing background color
+      };
+      onWidgetUpdate(updatedWidget);
+    },
+    [selectedWidget, onWidgetUpdate]
+  );
+
   return {
     handleFieldUpdate,
     handleColorChange,
     handleQuickColorApply,
+    handleBackgroundTypeChange,
+    handleBackgroundColorChange,
   };
 };

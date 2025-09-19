@@ -38,6 +38,31 @@ const Widget = ({
     setShowImageModal(false);
   };
 
+  // Determine background styling based on background type
+  const getBackgroundStyle = () => {
+    const backgroundType = widget.backgroundType || "gradient";
+
+    if (backgroundType === "solid" && widget.backgroundColor) {
+      return {
+        backgroundColor: widget.backgroundColor,
+        backgroundImage: "none",
+      };
+    } else {
+      // Use gradient class
+      return {};
+    }
+  };
+
+  const getBackgroundClassName = () => {
+    const backgroundType = widget.backgroundType || "gradient";
+
+    if (backgroundType === "solid") {
+      return ""; // No gradient class when using solid background
+    } else {
+      return widget.gradient || ""; // Use gradient class
+    }
+  };
+
   return (
     <>
       {/* Wrapper div centers the widget and ensures uniform width */}
@@ -47,7 +72,7 @@ const Widget = ({
           className={`
             w-full max-w-6xl
             ${widget.height || "min-h-[500px]"}
-            ${widget.gradient}
+            ${getBackgroundClassName()}
             flex flex-col p-8 cursor-pointer transition-all duration-300 overflow-hidden
             ${
               isSelected
@@ -55,6 +80,7 @@ const Widget = ({
                 : "border-transparent"
             }
           `}
+          style={getBackgroundStyle()}
         >
           {isSelected && (
             <WidgetControls
@@ -126,10 +152,10 @@ const Widget = ({
               ) : (
                 isSelected && (
                   <div
-                    className="h-full w-full border-2 border-dashed border-white/50 rounded-lg flex items-center justify-center cursor-pointer hover:border-white/80 transition-colors"
+                    className="h-full w-full border-2 border-dashed border-gray-400 rounded-lg flex items-center justify-center cursor-pointer hover:border-gray-600 transition-colors"
                     onClick={handleImageClick}
                   >
-                    <div className="text-white/80 text-center">
+                    <div className="text-gray-500 text-center">
                       <svg
                         className="w-8 h-8 mx-auto mb-2"
                         fill="none"
